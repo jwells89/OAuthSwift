@@ -11,7 +11,7 @@
 
     extension UIApplication {
         @nonobjc static var topViewController: UIViewController? {
-            #if !OAUTH_APP_EXTENSIONS
+            #if canImport(UIKit)
                 return UIApplication.shared.topViewController
             #else
                 return nil

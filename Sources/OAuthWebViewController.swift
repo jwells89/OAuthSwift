@@ -53,7 +53,7 @@ open class OAuthWebViewController: OAuthViewController, OAuthSwiftURLHandlerType
     public var dismissViewControllerAnimated = true
 
     public var topViewController: UIViewController? {
-        #if !OAUTH_APP_EXTENSIONS
+        #if canImport(UIKit)
             return UIApplication.topViewController
         #else
             return nil

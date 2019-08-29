@@ -8,7 +8,7 @@
 
 import Foundation
 #if os(iOS)
-#if !OAUTH_APP_EXTENSIONS
+#if canImport(UIKit)
 import UIKit
 #endif
 #endif
@@ -103,7 +103,7 @@ open class OAuthSwiftHTTPRequest: NSObject, OAuthSwiftRequestHandle {
             self.session.finishTasksAndInvalidate()
 
             #if os(iOS)
-                #if !OAUTH_APP_EXTENSIONS
+                #if canImport(UIKit)
                     UIApplication.shared.isNetworkActivityIndicatorVisible = self.config.sessionFactory.isNetworkActivityIndicatorVisible
                 #endif
             #endif
@@ -113,7 +113,7 @@ open class OAuthSwiftHTTPRequest: NSObject, OAuthSwiftRequestHandle {
     /// Function called when receiving data from server.
     public static func completionHandler(completionHandler completion: CompletionHandler?, request: URLRequest, data: Data?, resp: URLResponse?, error: Error?) {
         #if os(iOS)
-        #if !OAUTH_APP_EXTENSIONS
+        #if canImport(UIKit)
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
         #endif
         #endif

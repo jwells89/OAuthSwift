@@ -27,7 +27,7 @@ open class OAuthSwiftOpenURLExternally: OAuthSwiftURLHandlerType {
 
     @objc open func handle(_ url: URL) {
         #if os(iOS) || os(tvOS)
-            #if !OAUTH_APP_EXTENSIONS
+            #if canImport(UIKit)
                 UIApplication.shared.openURL(url)
             #endif
         #elseif os(watchOS)
@@ -62,12 +62,12 @@ import AuthenticationServices
                                                                 let msg = error?.localizedDescription.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
                                                                 let urlString = "\(self.callbackUrlScheme)?error=\(msg ?? "UNKNOWN")"
                                                                 let url = URL(string: urlString)!
-                                                                #if !OAUTH_APP_EXTENSIONS
+                                                                #if canImport(UIKit)
                                                                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
                                                                 #endif
                                                                 return
                                                             }
-                                                            #if !OAUTH_APP_EXTENSIONS
+                                                            #if canImport(UIKit)
                                                                 UIApplication.shared.open(successURL, options: [:], completionHandler: nil)
                                                             #endif
             })
@@ -93,12 +93,12 @@ import AuthenticationServices
                                                             let msg = error?.localizedDescription.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
                                                             let urlString = "\(self.callbackUrlScheme)?error=\(msg ?? "UNKNOWN")"
                                                             let url = URL(string: urlString)!
-                                                            #if !OAUTH_APP_EXTENSIONS
+                                                            #if canImport(UIKit)
                                                                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
                                                             #endif
                                                             return
                                                         }
-                                                        #if !OAUTH_APP_EXTENSIONS
+                                                        #if canImport(UIKit)
                                                             UIApplication.shared.open(successURL, options: [:], completionHandler: nil)
                                                         #endif
             })
